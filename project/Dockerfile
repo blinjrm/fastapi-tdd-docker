@@ -19,7 +19,7 @@ COPY ./pyproject.toml .
 RUN pip install --upgrade pip \
     && pip3 install poetry \
     && poetry config virtualenvs.create false \
-    && poetry install --no-dev
+    && poetry install
 
 # add app
 COPY . .
