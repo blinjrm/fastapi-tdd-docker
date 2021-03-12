@@ -1,7 +1,6 @@
 import json
 
 import pytest
-
 from app.api import summaries
 
 
@@ -11,7 +10,9 @@ def test_create_summary(test_app_with_db, monkeypatch):
 
     monkeypatch.setattr(summaries, "generate_summary", mock_generate_summary)
 
-    response = test_app_with_db.post("/summaries/", data=json.dumps({"url": "https://foo.bar"}))
+    response = test_app_with_db.post(
+        "/summaries/", data=json.dumps({"url": "https://foo.bar"})
+    )
 
     assert response.status_code == 201
     assert response.json()["url"] == "https://foo.bar"
@@ -41,7 +42,9 @@ def test_read_summary(test_app_with_db, monkeypatch):
 
     monkeypatch.setattr(summaries, "generate_summary", mock_generate_summary)
 
-    response = test_app_with_db.post("/summaries/", data=json.dumps({"url": "https://foo.bar"}))
+    response = test_app_with_db.post(
+        "/summaries/", data=json.dumps({"url": "https://foo.bar"})
+    )
     summary_id = response.json()["id"]
 
     response = test_app_with_db.get(f"/summaries/{summary_id}/")
@@ -78,7 +81,9 @@ def test_read_all_summaries(test_app_with_db, monkeypatch):
 
     monkeypatch.setattr(summaries, "generate_summary", mock_generate_summary)
 
-    response = test_app_with_db.post("/summaries/", data=json.dumps({"url": "https://foo.bar"}))
+    response = test_app_with_db.post(
+        "/summaries/", data=json.dumps({"url": "https://foo.bar"})
+    )
     summary_id = response.json()["id"]
 
     response = test_app_with_db.get("/summaries/")
@@ -94,7 +99,9 @@ def test_remove_summary(test_app_with_db, monkeypatch):
 
     monkeypatch.setattr(summaries, "generate_summary", mock_generate_summary)
 
-    response = test_app_with_db.post("/summaries/", data=json.dumps({"url": "https://foo.bar"}))
+    response = test_app_with_db.post(
+        "/summaries/", data=json.dumps({"url": "https://foo.bar"})
+    )
     summary_id = response.json()["id"]
 
     response = test_app_with_db.delete(f"/summaries/{summary_id}/")
@@ -127,7 +134,9 @@ def test_update_summary(test_app_with_db, monkeypatch):
 
     monkeypatch.setattr(summaries, "generate_summary", mock_generate_summary)
 
-    response = test_app_with_db.post("/summaries/", data=json.dumps({"url": "https://foo.bar"}))
+    response = test_app_with_db.post(
+        "/summaries/", data=json.dumps({"url": "https://foo.bar"})
+    )
     summary_id = response.json()["id"]
 
     response = test_app_with_db.put(
@@ -196,8 +205,12 @@ def test_update_summary(test_app_with_db, monkeypatch):
         ],
     ],
 )
-def test_update_summary_invalid(test_app_with_db, summary_id, payload, status_code, detail):
-    response = test_app_with_db.put(f"/summaries/{summary_id}/", data=json.dumps(payload))
+def test_update_summary_invalid(
+    test_app_with_db, summary_id, payload, status_code, detail
+):
+    response = test_app_with_db.put(
+        f"/summaries/{summary_id}/", data=json.dumps(payload)
+    )
     assert response.status_code == status_code
     assert response.json()["detail"] == detail
 

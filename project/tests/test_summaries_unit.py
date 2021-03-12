@@ -2,7 +2,6 @@ import json
 from datetime import datetime
 
 import pytest
-
 from app.api import crud, summaries
 
 
@@ -209,7 +208,9 @@ def test_update_summary(test_app, monkeypatch):
         ],
     ],
 )
-def test_update_summary_invalid(test_app, monkeypatch, summary_id, payload, status_code, detail):
+def test_update_summary_invalid(
+    test_app, monkeypatch, summary_id, payload, status_code, detail
+):
     async def mock_put(id, payload):
         return None
 

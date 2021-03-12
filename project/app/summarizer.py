@@ -1,9 +1,8 @@
 import asyncio
 
 import nltk
-from newspaper import Article
-
 from app.models.tortoise import TextSummary
+from newspaper import Article
 
 
 async def generate_summary(summary_id: int, url: str) -> None:
