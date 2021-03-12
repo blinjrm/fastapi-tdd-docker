@@ -28,6 +28,7 @@ RUN pip install --upgrade pip \
 
 # lint
 COPY . /usr/src/app/
+RUN pip install black isort
 RUN isort .
 RUN black .
 
