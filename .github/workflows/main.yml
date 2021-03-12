@@ -79,10 +79,7 @@ jobs:
             ${{ env.IMAGE }}-final:latest
       - name: Pytest
         run: docker exec fastapi-tdd python -m pytest .
-      - name: Black
-        run: docker exec fastapi-tdd python -m black . --check
-      - name: isort
-        run: docker exec fastapi-tdd python -m isort . --check-only
+
 
   deploy:
     name: Deploy to Heroku
